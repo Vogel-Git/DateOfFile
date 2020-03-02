@@ -10,8 +10,6 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
-import com.drew.imaging.ImageProcessingException;
-
 import DateOfFile.DateTime;
 import DateOfFile.ReadData;
 
@@ -58,7 +56,7 @@ public class DefinedTest {
 			attributes_lastModified = Files.readAttributes(file.toPath(), "lastModifiedTime");
 			lastModifiedTime = (FileTime) attributes_lastModified.get("lastModifiedTime");
 			System.out.println("lastModifiedTime = " + lastModifiedTime);
-		} catch (ImageProcessingException | IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		assert (allfiles.size() == 1);

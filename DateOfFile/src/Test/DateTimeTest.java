@@ -72,7 +72,7 @@ class DateTimeTest {
 			} else {
 				assert (false);
 			}
-		} catch (ImageProcessingException | IOException e) {
+		} catch (IOException e) {
 			assert (false);
 			e.printStackTrace();
 		}
@@ -127,7 +127,7 @@ class DateTimeTest {
 				assert (false);
 			}
 
-		} catch (NullPointerException | IOException | ImageProcessingException e) {
+		} catch (NullPointerException | IOException e) {
 			assert (false);
 			e.printStackTrace();
 		}
@@ -222,7 +222,7 @@ class DateTimeTest {
 				assert (false);
 			}
 
-		} catch (NullPointerException | IOException | ImageProcessingException e) {
+		} catch (NullPointerException e) {
 			assert (false);
 			e.printStackTrace();
 		}

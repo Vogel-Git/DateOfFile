@@ -36,12 +36,17 @@ public class DateTime {
 	 * @throws ImageProcessingException
 	 * @throws IOException
 	 */
-	public Date getDateTimeOriginalExif(File file) throws ImageProcessingException, IOException {
-		Metadata metadata = ImageMetadataReader.readMetadata(file);
-		ExifSubIFDDirectory exif = metadata.getFirstDirectoryOfType(ExifSubIFDDirectory.class);
-		if (exif != null) {
-			Date date = exif.getDate(ExifDirectoryBase.TAG_DATETIME_ORIGINAL);
-			return date;
+	public Date getDateTimeOriginalExif(File file) {
+		Metadata metadata;
+		try {
+			metadata = ImageMetadataReader.readMetadata(file);
+			ExifSubIFDDirectory exif = metadata.getFirstDirectoryOfType(ExifSubIFDDirectory.class);
+			if (exif != null) {
+				Date date = exif.getDate(ExifDirectoryBase.TAG_DATETIME_ORIGINAL);
+				return date;
+			}
+		} catch (ImageProcessingException | IOException e) {
+			e.printStackTrace();
 		}
 		return null;
 	}

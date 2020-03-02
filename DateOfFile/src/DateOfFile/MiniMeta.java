@@ -5,6 +5,8 @@ import java.nio.file.Path;
 
 public class MiniMeta {
 
+	boolean selection;
+	String fileName;
 	File file;
 	Path path;
 	long creationTime;
@@ -21,6 +23,22 @@ public class MiniMeta {
 
 	public MiniMeta() {
 
+	}
+
+	public boolean isSelection() {
+		return selection;
+	}
+
+	public void setSelection(boolean selection) {
+		this.selection = selection;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String aValue) {
+		fileName = aValue;
 	}
 
 	public MiniMeta(File inputFile) {
@@ -91,5 +109,6 @@ public class MiniMeta {
 	public void setTyp(String typ) {
 		this.typ = typ;
 	}
+
 
 }

@@ -43,11 +43,13 @@ public class ReadData {
 					if (file.isDirectory()) {
 						getAllFilesInDir(file, sourceDir);
 					} else {
-						fileList.add(file);
+						if (!fileList.contains(dir)) {
+							fileList.add(file);
+						}
 					}
 				}
 			}
-		} else if (dir.isFile()) {
+		} else if (dir.isFile() && !fileList.contains(dir)) {
 			fileList.add(dir);
 		}
 
@@ -74,13 +76,13 @@ public class ReadData {
 						if (file.isDirectory() && currentLevel < level) {
 							getAllFilesInDir(file, sourceDir, level);
 						} else {
-							if (!file.isDirectory()) {
+							if (!file.isDirectory() && !fileList.contains(file)) {
 								fileList.add(file);
 							}
 						}
 					}
 				}
-			} else if (dir.isFile()) {
+			} else if (dir.isFile() && !fileList.contains(dir)) {
 				fileList.add(dir);
 			}
 			return fileList;
@@ -200,7 +202,7 @@ public class ReadData {
 	 * @return
 	 * @throws IOException
 	 */
-	public TreeMap<String, ArrayList<File>> sortFileMap(ArrayList<File> files) throws IOException {
+	public TreeMap<String, ArrayList<File>> sortFileMap(ArrayList<File> files) {
 		TreeMap<String, ArrayList<File>> mapOfFile = new TreeMap<>();
 		String key = "";
 		for (File file : files) {

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeMap;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import DateOfFile.ReadData;
 
@@ -152,11 +152,7 @@ class ReadDataTest {
 		Integer leverl = 4;
 		ArrayList<File> allfiles = data.getAllFilesInDir(dir, dir, leverl);
 		TreeMap<String, ArrayList<File>> map = new TreeMap<>();
-		try {
-			map = data.sortFileMap(allfiles);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		map = data.sortFileMap(allfiles);
 		ArrayList<File> listMedia = data.getFilesByKey(map, data.MEDIA);
 		ArrayList<File> listVideo = data.getFilesByKey(map, data.VIDEO);
 		ArrayList<File> listRest = data.getFilesByKey(map, data.REST);
