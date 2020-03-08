@@ -14,7 +14,7 @@ public class MiniMeta {
 	long lastAccessTime;
 	long lastModifiedTime;
 	long offset;
-	String typ; // rest, Media, video;
+	String type; // rest, Media, video;
 
 	long oldLastAccessTime;
 	long oldLastModifiedTime;
@@ -102,12 +102,12 @@ public class MiniMeta {
 		this.offset = offset;
 	}
 
-	public String getTyp() {
-		return typ;
+	public String getType() {
+		return type;
 	}
 
-	public void setTyp(String typ) {
-		this.typ = typ;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 

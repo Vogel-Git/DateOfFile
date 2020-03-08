@@ -28,8 +28,8 @@ public class Controller implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		if (event.getActionCommand().equals("Selection")) {
-			LOG.info("Selection");
+		if (event.getActionCommand().equals("Select")) {
+			LOG.info("Select");
 			fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 			int returnVal = fc.showOpenDialog(null);
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -52,7 +52,7 @@ public class Controller implements ActionListener {
 
 			gui.getResetButton().setEnabled(false);
 			gui.getAnalyseButton().setEnabled(false);
-			gui.getProgressButton().setEnabled(false);
+			gui.getProcessButton().setEnabled(false);
 
 		} else if (event.getActionCommand().equals("Analyse")) {
 			LOG.info("Analyse");
@@ -87,23 +87,23 @@ public class Controller implements ActionListener {
 				DateOfFileModel.printDateTimeOfFiles(correctionList);
 				LOG.info("----------------------------------------------------------------------");
 				if (!correctionList.isEmpty()) {
-					gui.getProgressButton().setEnabled(true);
+					gui.getProcessButton().setEnabled(true);
 				}
 			} catch (IOException exc) {
 				exc.printStackTrace();
 			}
 			gui.getResetButton().setEnabled(true);
 
-		} else if (event.getActionCommand().equals("Progress")) {
-			LOG.info("Progress");
+		} else if (event.getActionCommand().equals("Process")) {
+			LOG.info("Process");
 			gui.getResetButton().setEnabled(false);
 			try {
 				DateOfFileModel.correction(dofModel.getCorrectionList());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			gui.getResetButton().setEnabled(true);
 			LOG.info("-------------------------------- Done --------------------------------");
-
 		} else if (event.getActionCommand().equals("Close")) {
 			LOG.info("Close");
 			gui.dispose();

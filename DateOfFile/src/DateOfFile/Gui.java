@@ -26,14 +26,14 @@ public class Gui extends JFrame {
 	private JButton fcButton;
 	private JButton resetButton;
 	private JButton analyseButton;
-	private JButton progressButton;
+	private JButton processButton;
 	private JButton closeButton;
 
 	public Gui(ActionListener listener) {
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
 
-		JLabel titleLabel = new JLabel("Select Pictur Files or Dir to set oroginal Date");
+		JLabel titleLabel = new JLabel("Select Picture Files or Dir to set original Date");
 		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		titleLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
 
@@ -47,8 +47,7 @@ public class Gui extends JFrame {
 		mainPanel.add(tablePanel);
 
 		// Selection Panel
-		JLabel fcLable = new JLabel("Files or Dir ");
-		fcButton = new JButton("Selection");
+		fcButton = new JButton("Select");
 		fcButton.setEnabled(true);
 		JLabel levelLable = new JLabel("Level: ");
 		String[] cbLeve = new String[] { "All", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
@@ -56,7 +55,6 @@ public class Gui extends JFrame {
 
 		jFieldFileOrDir = new JTextField(30);
 		jFieldFileOrDir.setEditable(false);
-		selectionPanel.add(fcLable);
 		selectionPanel.add(fcButton);
 		selectionPanel.add(levelLable);
 		selectionPanel.add(jcbLevel);
@@ -74,13 +72,13 @@ public class Gui extends JFrame {
 		resetButton.setEnabled(false);
 		analyseButton = new JButton("Analyse");
 		analyseButton.setEnabled(false);
-		progressButton = new JButton("Progress");
-		progressButton.setEnabled(false);
+		processButton = new JButton("Process");
+		processButton.setEnabled(false);
 		closeButton = new JButton("Close");
 		closeButton.setEnabled(true);
 		buttonPanel.add(resetButton);
 		buttonPanel.add(analyseButton);
-		buttonPanel.add(progressButton);
+		buttonPanel.add(processButton);
 		buttonPanel.add(closeButton);
 
 		// Top-level Layout
@@ -92,7 +90,7 @@ public class Gui extends JFrame {
 		fcButton.addActionListener(listener);
 		resetButton.addActionListener(listener);
 		analyseButton.addActionListener(listener);
-		progressButton.addActionListener(listener);
+		processButton.addActionListener(listener);
 		closeButton.addActionListener(listener);
 
 //		pack();
@@ -160,12 +158,12 @@ public class Gui extends JFrame {
 		this.analyseButton = analyseButton;
 	}
 
-	public JButton getProgressButton() {
-		return progressButton;
+	public JButton getProcessButton() {
+		return processButton;
 	}
 
-	public void setProgressButton(JButton progressButton) {
-		this.progressButton = progressButton;
+	public void setProcessButton(JButton procssButton) {
+		processButton = procssButton;
 	}
 
 	public JButton getCloseButton() {

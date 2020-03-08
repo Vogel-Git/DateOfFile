@@ -61,12 +61,12 @@ public class DateOfFileModel {
 				fmm.setFile(file);
 				fmm.setFileName(file.getName());
 				if (key.equals(data.MEDIA)) {
-					fmm.setTyp(data.MEDIA);
+					fmm.setType(data.MEDIA);
 					// AufnahmeDatum:// ExifSubIFDDirectory.TAG_DATETIME_ORIGINAL
 					originalDate = dateTime.getDateTimeOriginalExif(file);
 				}
 				if (key.equals(data.VIDEO)) {
-					fmm.setTyp(data.VIDEO);
+					fmm.setType(data.VIDEO);
 					// TODO format prueffen 1
 					originalDate = dateTime.readVideoAttributeCreationTime(file);
 				}

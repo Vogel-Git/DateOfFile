@@ -12,8 +12,8 @@ public class DateOfFileTableModel extends AbstractTableModel {
 	private ArrayList<MiniMeta> listMiniMeta = new ArrayList<>();
 	private Vector<TableModelListener> listeners = new Vector<>();
 
-	private final String[] columnNames = new String[] { "Selecton", "Typ", "FileName", "CreationTime", "Offset",
-			"lastModifiedTime" };
+	private final String[] columnNames = new String[] { "Selection", "Type", "FileName", "CreationTime", "Offset",
+			"LastModifiedTime" };
 	private final Class[] columnClass = new Class[] { Boolean.class, String.class, String.class, Long.class,
 			Long.class, Long.class };
 
@@ -44,7 +44,7 @@ public class DateOfFileTableModel extends AbstractTableModel {
 		case 0:
 			return mm.isSelection() ? Boolean.TRUE : Boolean.FALSE;
 		case 1:
-			return mm.getTyp();
+			return mm.getType();
 		case 2:
 			return mm.getFileName();
 		case 3:
@@ -67,7 +67,7 @@ public class DateOfFileTableModel extends AbstractTableModel {
 		case 0:
 			mm.isSelection();
 		case 1:
-			mm.getTyp();
+			mm.getType();
 		case 2:
 			mm.getFileName();
 		case 3:
