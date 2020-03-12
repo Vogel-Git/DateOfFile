@@ -1,10 +1,12 @@
 package DateOfFile;
 
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -13,8 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
+import javax.swing.border.LineBorder;
 
 public class Gui extends JFrame {
 
@@ -30,23 +32,16 @@ public class Gui extends JFrame {
 	private JButton closeButton;
 
 	public Gui(ActionListener listener) {
+
+		Container content = getContentPane();
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setLayout(new BorderLayout());
-
-		JLabel titleLabel = new JLabel("Select Picture Files or Dir to set original Date");
-		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		titleLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
-
-		// Main Panel
-		JPanel mainPanel = new JPanel();
-		JPanel selectionPanel = new JPanel();
-		JPanel tablePanel = new JPanel();
-		mainPanel.setLayout(new GridLayout(2, 1));
-
-		mainPanel.add(selectionPanel);
-		mainPanel.add(tablePanel);
 
 		// Selection Panel
+		JPanel selectionPanel = new JPanel();
+		JPanel titelPanel = new JPanel();
+		JPanel elementsPanel = new JPanel();
+
+		JLabel info = new JLabel("Select Picture Files or Dir to set original Date");
 		fcButton = new JButton("Select");
 		fcButton.setEnabled(true);
 		JLabel levelLable = new JLabel("Level: ");
@@ -55,16 +50,33 @@ public class Gui extends JFrame {
 
 		jFieldFileOrDir = new JTextField(30);
 		jFieldFileOrDir.setEditable(false);
-		selectionPanel.add(fcButton);
-		selectionPanel.add(levelLable);
-		selectionPanel.add(jcbLevel);
-		selectionPanel.add(jFieldFileOrDir);
+		selectionPanel.setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		c.gridx = 0;
+		c.gridy = 0;
+		selectionPanel.add(titelPanel, c);
+		c.gridx = 0;
+		c.gridy = 1;
+		selectionPanel.add(elementsPanel, c);
+		titelPanel.add(info, c);
+		elementsPanel.add(fcButton, c);
+		elementsPanel.add(levelLable, c);
+		elementsPanel.add(jcbLevel, c);
+		elementsPanel.add(jFieldFileOrDir, c);
 
 		// Table
 		fileTableModel = new DateOfFileTableModel();
 		fileTable = new JTable(fileTableModel);
-		JScrollPane jsp = new JScrollPane(fileTable);
-		tablePanel.add(jsp);
+		fileTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		fileTable.getColumnModel().getColumn(0).setPreferredWidth(30);
+		fileTable.getColumnModel().getColumn(1).setPreferredWidth(40);
+		fileTable.getColumnModel().getColumn(2).setPreferredWidth(250);
+		fileTable.getColumnModel().getColumn(3).setPreferredWidth(100);
+		fileTable.getColumnModel().getColumn(4).setPreferredWidth(100);
+		fileTable.getColumnModel().getColumn(5).setPreferredWidth(100);
+		fileTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		JScrollPane sp = new JScrollPane(fileTable);
+		sp.setBorder(new LineBorder(Color.black, 5));
 
 		// Buttons Panel
 		JPanel buttonPanel = new JPanel();
@@ -82,9 +94,9 @@ public class Gui extends JFrame {
 		buttonPanel.add(closeButton);
 
 		// Top-level Layout
-		add(titleLabel, BorderLayout.NORTH);
-		add(mainPanel, BorderLayout.CENTER);
-		add(buttonPanel, BorderLayout.SOUTH);
+		content.add(new JScrollPane(selectionPanel), BorderLayout.PAGE_START);
+		content.add(sp, BorderLayout.CENTER);
+		content.add(new JScrollPane(buttonPanel), BorderLayout.PAGE_END);
 
 		// Listeners
 		fcButton.addActionListener(listener);
@@ -93,8 +105,9 @@ public class Gui extends JFrame {
 		processButton.addActionListener(listener);
 		closeButton.addActionListener(listener);
 
-//		pack();
-		setSize(550, 450);
+		this.pack();
+		setSize(700, 450);
+		this.setVisible(true);
 
 	}
 
