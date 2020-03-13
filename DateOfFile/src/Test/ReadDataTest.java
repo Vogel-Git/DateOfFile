@@ -9,12 +9,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeMap;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import DateOfFile.ReadData;
 
 class ReadDataTest {
 	ReadData data = new ReadData();
+
+	@Test
+	void test() {
+//		fail("Not yet implemented");
+	}
 
 	@Test
 	void testGetAllFilesFromDir() {
@@ -279,11 +284,6 @@ class ReadDataTest {
 		}
 	}
 
-	@Test
-	void test() {
-//		fail("Not yet implemented");
-	}
-
 	// -------------------------------------------------------------------------------//
 
 	private InputStreamReader getInputStreamReader(String isString) {
@@ -292,5 +292,4 @@ class ReadDataTest {
 		InputStreamReader isr = new InputStreamReader(is);
 		return isr;
 	}
-
 }
