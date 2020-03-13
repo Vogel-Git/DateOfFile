@@ -25,7 +25,7 @@ public class MiniMeta {
 
 	}
 
-	public boolean isSelection() {
+	public boolean getSelection() {
 		return selection;
 	}
 

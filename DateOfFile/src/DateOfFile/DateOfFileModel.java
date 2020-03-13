@@ -148,7 +148,7 @@ public class DateOfFileModel {
 			LOG.info("File not found");
 		} else {
 			for (MiniMeta fmm : filesMiniMeta) {
-				if (fmm.getCreationTime() != fmm.getRecordingTime()) {
+				if (fmm.getSelection() && fmm.getCreationTime() != fmm.getRecordingTime()) {
 					correctionList.add(fmm);
 				}
 			}
@@ -161,6 +161,9 @@ public class DateOfFileModel {
 			if (correctionList.isEmpty()) {
 				LOG.info("File not found");
 			} else {
+				if (ftc.getSelection() == false) {
+					continue;
+				}
 				Long time = null;
 				if (ftc.getRecordingTime() != 0) {
 					time = ftc.getRecordingTime();

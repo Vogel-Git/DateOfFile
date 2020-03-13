@@ -42,7 +42,7 @@ public class DateOfFileTableModel extends AbstractTableModel {
 		MiniMeta mm = listMiniMeta.get(rowIndex);
 		switch (columnIndex) {
 		case 0:
-			return mm.isSelection() ? Boolean.TRUE : Boolean.FALSE;
+			return mm.getSelection() ? Boolean.TRUE : Boolean.FALSE;
 		case 1:
 			return mm.getType();
 		case 2:
@@ -60,25 +60,14 @@ public class DateOfFileTableModel extends AbstractTableModel {
 
 	@Override
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-		System.out.println("setValueAt");
 
 		MiniMeta mm = listMiniMeta.get(rowIndex);
 		switch (columnIndex) {
 		case 0:
-			mm.isSelection();
-		case 1:
-			mm.getType();
-		case 2:
-			mm.getFileName();
-		case 3:
-			mm.getCreationTime();
-		case 4:
-			Long.valueOf(mm.getOffset());
-		case 5:
-			Long.valueOf(mm.getLastModifiedTime());
+			mm.setSelection((boolean) aValue);
 		}
 
-//		// notify model listeners of cell change
+		// notify model listeners of cell change
 		fireTableCellUpdated(rowIndex, columnIndex);
 	}
 
@@ -94,7 +83,12 @@ public class DateOfFileTableModel extends AbstractTableModel {
 
 	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
-		return false;
+		switch (columnIndex) {
+		case 0:
+			return true;
+		default:
+			return false;
+		}
 	}
 
 	public ArrayList<MiniMeta> getListMiniMeta() {
