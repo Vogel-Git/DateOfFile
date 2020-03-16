@@ -17,6 +17,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.border.LineBorder;
+import javax.swing.table.TableColumn;
 
 public class Gui extends JFrame {
 
@@ -32,7 +33,6 @@ public class Gui extends JFrame {
 	private JButton closeButton;
 
 	public Gui(ActionListener listener) {
-
 		Container content = getContentPane();
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,13 +68,18 @@ public class Gui extends JFrame {
 		fileTableModel = new DateOfFileTableModel();
 		fileTable = new JTable(fileTableModel);
 		fileTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		fileTable.getColumnModel().getColumn(0).setPreferredWidth(30);
+		fileTable.getColumnModel().getColumn(0).setPreferredWidth(70);
 		fileTable.getColumnModel().getColumn(1).setPreferredWidth(40);
 		fileTable.getColumnModel().getColumn(2).setPreferredWidth(250);
 		fileTable.getColumnModel().getColumn(3).setPreferredWidth(100);
 		fileTable.getColumnModel().getColumn(4).setPreferredWidth(100);
 		fileTable.getColumnModel().getColumn(5).setPreferredWidth(100);
 		fileTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+
+		// Table Header renderer
+		TableColumn tcSelection = fileTable.getColumnModel().getColumn(0);
+		tcSelection.setHeaderRenderer(new BooleanHeaderRenderer(fileTable, 0));
+
 		JScrollPane sp = new JScrollPane(fileTable);
 		sp.setBorder(new LineBorder(Color.black, 5));
 
@@ -106,7 +111,7 @@ public class Gui extends JFrame {
 		closeButton.addActionListener(listener);
 
 		this.pack();
-		setSize(700, 450);
+		setSize(750, 450);
 		this.setVisible(true);
 
 	}
