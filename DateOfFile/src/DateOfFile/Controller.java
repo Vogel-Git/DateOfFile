@@ -48,7 +48,9 @@ public class Controller implements ActionListener {
 			gui.getjFieldFileOrDir().setText("");
 			dofModel.setLevel(null);
 			gui.getJcbLevel().setSelectedIndex(0);
-			dofModel.setCorrectionList(null);
+			DateOfFileModel.getData().getFileList().clear();
+			DateOfFileModel.getCorrectionList().clear();
+			DateOfFileModel.getFilesMiniMeta().clear();
 			gui.getFileTableModel().setDataOfTableAndUpdate(null);
 
 			gui.getResetButton().setEnabled(false);
@@ -57,8 +59,9 @@ public class Controller implements ActionListener {
 
 		} else if (event.getActionCommand().equals("Analyse")) {
 			LOG.info("Analyse");
-			dofModel.setCorrectionList(null);
-			gui.getJcbLevel().setSelectedIndex(0);
+			DateOfFileModel.getData().getFileList().clear();
+			DateOfFileModel.getCorrectionList().clear();
+			DateOfFileModel.getFilesMiniMeta().clear();
 			gui.getFileTableModel().setDataOfTableAndUpdate(null);
 
 			gui.getResetButton().setEnabled(false);
@@ -99,7 +102,7 @@ public class Controller implements ActionListener {
 			LOG.info("Process");
 			gui.getResetButton().setEnabled(false);
 			try {
-				DateOfFileModel.correction(dofModel.getCorrectionList());
+				DateOfFileModel.correction(DateOfFileModel.getCorrectionList());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

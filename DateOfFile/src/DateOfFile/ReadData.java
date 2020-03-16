@@ -235,4 +235,12 @@ public class ReadData {
 		return map.get(key);
 	}
 
+	public ArrayList<File> getFileList() {
+		return fileList;
+	}
+
+	public void setFileList(ArrayList<File> fileList) {
+		this.fileList = fileList;
+	}
+
 }

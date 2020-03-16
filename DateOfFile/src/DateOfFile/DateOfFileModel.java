@@ -25,11 +25,13 @@ public class DateOfFileModel {
 	Version version;
 	File dir;
 	Integer level;
-	ArrayList<MiniMeta> correctionList;
 
 	static ReadData data;
 	static DateTime dateTime;
 	static Boolean offset;
+
+	static ArrayList<MiniMeta> correctionList = new ArrayList<>();
+	static ArrayList<MiniMeta> filesMiniMeta = new ArrayList<>();
 
 	public DateOfFileModel() {
 		version = new Version();
@@ -48,7 +50,6 @@ public class DateOfFileModel {
 	 */
 	static ArrayList<MiniMeta> readDateTimeOfFiles(TreeMap<String, ArrayList<File>> map) throws IOException {
 		map.remove(data.REST);
-		ArrayList<MiniMeta> filesMiniMeta = new ArrayList<>();
 		for (Entry<String, ArrayList<File>> entry : map.entrySet()) {
 			String key = entry.getKey();
 			ArrayList<File> files = entry.getValue();
@@ -143,17 +144,16 @@ public class DateOfFileModel {
 	}
 
 	static ArrayList<MiniMeta> correctionList(ArrayList<MiniMeta> filesMiniMeta) {
-		ArrayList<MiniMeta> correctionList = new ArrayList<>();
 		if (filesMiniMeta.isEmpty()) {
 			LOG.info("File not found");
 		} else {
 			for (MiniMeta fmm : filesMiniMeta) {
 				if (fmm.getSelection() && fmm.getCreationTime() != fmm.getRecordingTime()) {
-					correctionList.add(fmm);
+					getCorrectionList().add(fmm);
 				}
 			}
 		}
-		return correctionList;
+		return getCorrectionList();
 	}
 
 	static void correction(ArrayList<MiniMeta> correctionList) throws IOException {
@@ -208,12 +208,8 @@ public class DateOfFileModel {
 		this.level = level;
 	}
 
-	public ArrayList<MiniMeta> getCorrectionList() {
-		return correctionList;
-	}
-
 	public void setCorrectionList(ArrayList<MiniMeta> correctionList) {
-		this.correctionList = correctionList;
+		DateOfFileModel.correctionList = correctionList;
 	}
 
 	public static ReadData getData() {
@@ -240,4 +236,15 @@ public class DateOfFileModel {
 		DateOfFileModel.offset = offset;
 	}
 
+	public static ArrayList<MiniMeta> getFilesMiniMeta() {
+		return filesMiniMeta;
+	}
+
+	public static void setFilesMiniMeta(ArrayList<MiniMeta> filesMiniMeta) {
+		DateOfFileModel.filesMiniMeta = filesMiniMeta;
+	}
+
+	public static ArrayList<MiniMeta> getCorrectionList() {
+		return correctionList;
+	}
 }
