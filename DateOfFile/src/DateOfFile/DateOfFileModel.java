@@ -61,8 +61,8 @@ public class DateOfFileModel {
 				MiniMeta fmm = new MiniMeta();
 				fmm.setFile(file);
 				fmm.setFileName(file.getName());
-				if (key.equals(data.MEDIA)) {
-					fmm.setType(data.MEDIA);
+				if (key.equals(data.IMAGE)) {
+					fmm.setType(data.IMAGE);
 					// AufnahmeDatum:// ExifSubIFDDirectory.TAG_DATETIME_ORIGINAL
 					originalDate = dateTime.getDateTimeOriginalExif(file);
 				}
@@ -143,6 +143,13 @@ public class DateOfFileModel {
 		}
 	}
 
+	/**
+	 * Collects data as MiniMeta of selected files which file creation time is
+	 * different to file recording time.
+	 *
+	 * @param filesMiniMeta The ArrayList<MiniMeta> of files.
+	 * @return The ArrayList<MiniMeta> of files to correction.
+	 */
 	static ArrayList<MiniMeta> correctionList(ArrayList<MiniMeta> filesMiniMeta) {
 		if (filesMiniMeta.isEmpty()) {
 			LOG.info("File not found");
@@ -156,6 +163,15 @@ public class DateOfFileModel {
 		return getCorrectionList();
 	}
 
+	/**
+	 * Set correct time and date of file when file last modified time is less than
+	 * recording time or creation time. If recording time is available it will be
+	 * used else creation time. Warning: both creation time and last modified time
+	 * from file will be changed to same value.
+	 *
+	 * @param correctionList The ArrayList<MiniMeta> of files to correction.
+	 * @throws IOException
+	 */
 	static void correction(ArrayList<MiniMeta> correctionList) throws IOException {
 		for (MiniMeta ftc : correctionList) {
 			if (correctionList.isEmpty()) {

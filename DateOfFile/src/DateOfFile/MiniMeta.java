@@ -14,7 +14,7 @@ public class MiniMeta {
 	long lastAccessTime;
 	long lastModifiedTime;
 	long offset;
-	String type; // rest, Media, video;
+	String type; // rest, image, video;
 
 	long oldLastAccessTime;
 	long oldLastModifiedTime;

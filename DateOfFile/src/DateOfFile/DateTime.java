@@ -16,7 +16,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Optional;
 
 import com.drew.imaging.ImageMetadataReader;
 import com.drew.imaging.ImageProcessingException;
@@ -31,7 +30,7 @@ public class DateTime {
 
 	/**
 	 *
-	 * @param file
+	 * @param file The current File
 	 * @return
 	 * @throws ImageProcessingException
 	 * @throws IOException
@@ -53,7 +52,7 @@ public class DateTime {
 
 	/**
 	 *
-	 * @param file
+	 * @param file The current File
 	 * @return
 	 * @throws ImageProcessingException
 	 * @throws IOException
@@ -85,7 +84,7 @@ public class DateTime {
 
 	/**
 	 *
-	 * @param file
+	 * @param file The current File
 	 * @return
 	 */
 	public Date readVideoAttributeCreationTime(File file) {
@@ -97,7 +96,7 @@ public class DateTime {
 				for (Tag tag : directory.getTags()) {
 					if (CREATION_TIME.equals(tag.getTagName())) {
 						String creationTime = tag.getDescription();
-						String ext = getExtension(file.getName());
+						String ext = UtilityClass.getExtension(file.getName());
 						DateFormat dateFormat;
 						if (ext.contentEquals("MOV")) {
 							SimpleDateFormat parser = new SimpleDateFormat("EEE MMM d HH:mm:ss XXX yyyy",
@@ -139,7 +138,7 @@ public class DateTime {
 	/**
 	 * ??? Just for Test used
 	 *
-	 * @param file
+	 * @param file The current File
 	 * @return
 	 */
 	// TODO format prueffen 2
@@ -155,10 +154,12 @@ public class DateTime {
 		return creationTime;
 	}
 
-	/***
+	/**
+	 * File creation time and last modified time will be changed. Warning: both
+	 * creation time and last modified time from file will be changed to same value.
 	 *
-	 * @param file
-	 * @param dateMillis
+	 * @param file       The current File
+	 * @param dateMillis - Date in Milliseconds
 	 * @throws IOException
 	 */
 	public void modifyTime(File file, long dateMillis) throws IOException {
@@ -177,7 +178,7 @@ public class DateTime {
 
 	/**
 	 *
-	 * @param file
+	 * @param file The current File
 	 * @return
 	 */
 	public Map<File, ArrayList<FileTime>> createModifydMap(File file) {
@@ -206,13 +207,4 @@ public class DateTime {
 		return mapFileTimes;
 	}
 
-	public Optional<String> getExtensionByStringHandling(String filename) {
-		return Optional.ofNullable(filename).filter(f -> f.contains("."))
-				.map(f -> f.substring(filename.lastIndexOf(".") + 1));
-	}
-
-	public String getExtension(String filename) {
-		int index = filename.indexOf(".");
-		return filename.substring(index + 1);
-	}
 }

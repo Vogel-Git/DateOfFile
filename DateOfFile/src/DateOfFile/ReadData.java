@@ -17,11 +17,11 @@ public class ReadData {
 
 	private static final Logger LOG = LogManager.getLogger(DateOfFile.class);
 
-	public final String MEDIA = "Media";
+	public final String IMAGE = "Image";
 	public final String VIDEO = "Video";
 	public final String REST = "Rest";
 
-	private final Set<String> mediaExtensions = new HashSet<>(Arrays.asList("jpg", "jpeg", "png", "gif", "bmp", "ico",
+	private final Set<String> imageExtensions = new HashSet<>(Arrays.asList("jpg", "jpeg", "png", "gif", "bmp", "ico",
 			"webp", "pcx", "ai", "eps", "nef", "crw", "cr2", "orf", "arw", "raf", "srw", "x3f", "rw2", "rwl", "tif",
 			"tiff", "psd", "dng", "3g2", "pbm", "pnm", "pgm"));
 
@@ -32,8 +32,8 @@ public class ReadData {
 	/**
 	 * List recursive all files in source directory
 	 *
-	 * @param dir
-	 * @param sourceDir
+	 * @param dir       The current file or directory
+	 * @param sourceDir The current directory
 	 * @return
 	 */
 	public ArrayList<File> getAllFilesInDir(File dir, File sourceDir) {
@@ -59,9 +59,9 @@ public class ReadData {
 	/**
 	 * List recursive all files in current directory depending on level
 	 *
-	 * @param dir
-	 * @param sourceDir
-	 * @param level
+	 * @param dir       The current file or directory
+	 * @param sourceDir The current directory
+	 * @param level     how many sub directory will by proceed
 	 * @return
 	 */
 	public ArrayList<File> getAllFilesInDir(File dir, File sourceDir, Integer level) {
@@ -180,25 +180,10 @@ public class ReadData {
 	}
 
 	/**
-	 * Get the File extension
+	 * Files will be pouted into map <String, ArrayList<File>> according to the key
+	 * IMAGE, VIDEO or REST
 	 *
-	 * @param file
-	 * @return
-	 */
-	public String getFileExtension(File file) {
-		String name = file.getName();
-		int lastIndexOf = name.lastIndexOf(".");
-		if (lastIndexOf == -1) {
-			return ""; // empty extension
-		}
-		return name.substring(lastIndexOf + 1).toLowerCase();
-	}
-
-	/**
-	 * Files will be entered into map <String, ArrayList<File> according to the key
-	 * MEDIA or REST
-	 *
-	 * @param files
+	 * @param files The ArrayList of Files
 	 * @return
 	 * @throws IOException
 	 */
@@ -206,11 +191,11 @@ public class ReadData {
 		TreeMap<String, ArrayList<File>> mapOfFile = new TreeMap<>();
 		String key = "";
 		for (File file : files) {
-			String ext = getFileExtension(file);
+			String ext = UtilityClass.getFileExtension(file);
 			if (videoExtensions.contains(ext.toLowerCase())) {
 				key = VIDEO;
-			} else if (mediaExtensions.contains(ext.toLowerCase())) {
-				key = MEDIA;
+			} else if (imageExtensions.contains(ext.toLowerCase())) {
+				key = IMAGE;
 			} else {
 				key = REST;
 			}

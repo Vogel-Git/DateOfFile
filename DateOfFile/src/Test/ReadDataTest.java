@@ -12,6 +12,7 @@ import java.util.TreeMap;
 import org.junit.jupiter.api.Test;
 
 import DateOfFile.ReadData;
+import DateOfFile.UtilityClass;
 
 class ReadDataTest {
 	ReadData data = new ReadData();
@@ -158,7 +159,7 @@ class ReadDataTest {
 		ArrayList<File> allfiles = data.getAllFilesInDir(dir, dir, leverl);
 		TreeMap<String, ArrayList<File>> map = new TreeMap<>();
 		map = data.sortFileMap(allfiles);
-		ArrayList<File> listMedia = data.getFilesByKey(map, data.MEDIA);
+		ArrayList<File> listMedia = data.getFilesByKey(map, data.IMAGE);
 		ArrayList<File> listVideo = data.getFilesByKey(map, data.VIDEO);
 		ArrayList<File> listRest = data.getFilesByKey(map, data.REST);
 		assert (listMedia.size() == 6);
@@ -174,7 +175,7 @@ class ReadDataTest {
 		fileMap.put("", new File("kaput_3"));
 		for (String key : fileMap.keySet()) {
 			File f = fileMap.get(key);
-			String fType = data.getFileExtension(f);
+			String fType = UtilityClass.getFileExtension(f);
 			assert (fType.equals(key));
 		}
 	}
